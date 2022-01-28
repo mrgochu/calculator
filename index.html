@@ -92,32 +92,40 @@
         document.getElementById('memory').textContent = '';
     }
 
-    //change color of orange buttons (operators)
-    orange.forEach(button => button.addEventListener('mousedown', function(){
-        this.style.backgroundColor = 'rgb(224, 187, 117)';
-    }));
-    orange.forEach(button => button.addEventListener('mouseup', function(){
+    //functions to change key colors when pressed
+    function defaultOrange(){
         this.style.backgroundColor = 'rgb(255, 212, 133)';
-    }));
+    }
+    function downOrange(e){
+        this.style.backgroundColor = 'rgb(224, 187, 117)';
+    }
+    function defaultBlue(){
+        this.style.backgroundColor = 'rgb(224, 240, 255)';
+    }
+    function downBlue(){
+        this.style.backgroundColor = 'rgb(207, 221, 235)';
+    }
+    function defaultRed(){
+        this.style.backgroundColor = 'rgb(255, 148, 148)';
+    }
+    function downRed(){
+        this.style.backgroundColor = 'rgb(218, 128, 128)';
+    }
+
+    //change color of orange buttons (operators)
+    orange.forEach(button => button.addEventListener('mousedown', downOrange));
+    orange.forEach(button => button.addEventListener('mouseup', defaultOrange));
 
     //change numbers and equal sign color (blue)
-    blues.forEach(button => button.addEventListener('mousedown', function(){
-        this.style.backgroundColor = 'rgb(207, 221, 235)';
-    }));
-    blues.forEach(button => button.addEventListener('mouseup', function(){
-        this.style.backgroundColor = 'rgb(224, 240, 255)';
-    }));
+    blues.forEach(button => button.addEventListener('mousedown', downBlue));
+    blues.forEach(button => button.addEventListener('mouseup', defaultBlue));
 
     //change color for clear button (red)
-    reds.forEach(button => button.addEventListener('mousedown', function(){
-        this.style.backgroundColor = 'rgb(218, 128, 128)';
-    }));
-    reds.forEach(button => button.addEventListener('mouseup', function(){
-        this.style.backgroundColor = 'rgb(255, 148, 148)';
-    }));
+    reds.forEach(button => button.addEventListener('mousedown', downRed));
+    reds.forEach(button => button.addEventListener('mouseup', defaultRed));
 
-    // for DIGIT BUTTONS
-    allButtons.forEach(button => button.addEventListener('click', function(){
+    // functions for buttons
+    function forDigits(){
         equalCounter = 0;
         if (temp){
             b += this.textContent;
@@ -126,11 +134,22 @@
         else {
             a += this.textContent;
             document.getElementById('screen').textContent = a;
-        }
-    }));
+        }        
+    }
 
-    // for OPERATOR BUTTONS
-    operatorButtons.forEach(button => button.addEventListener('click', function(){
+    function forDigitsKeyboard(e){
+        equalCounter = 0;
+        if (temp){
+            b += e.key;
+            document.getElementById('screen').textContent = b;
+        }
+        else {
+            a += e.key;
+            document.getElementById('screen').textContent = a;
+        } 
+    }
+
+    function forOperators(){
         if (b){
             a = parseInt(a);
             b = parseInt(b);
@@ -151,11 +170,31 @@
             operator = this.textContent;
             document.getElementById('memory').textContent = `${a} ${operator}`;
         }
+    }
+    function forOperatorsKeyboard(e){
+        if (b){
+            a = parseInt(a);
+            b = parseInt(b);
+            let answer = operate(operator, a, b);
+            operator = e.key;
+            document.getElementById('memory').textContent = `${answer} ${operator}`;
+            a = answer;
+            b = '';
+        }
+        else if (!a && !b){
+            a = tempAnswer;
+            temp = true;
+            operator = e.key;
+            document.getElementById('memory').textContent = `${a} ${operator}`;
+        }
+        else {
+            temp = true;
+            operator = e.key;
+            document.getElementById('memory').textContent = `${a} ${operator}`;
+        }
+    }
 
-    }));
-
-    // for EQUAL SIGN BUTTON
-    equals.forEach(button => button.addEventListener('click', function(){
+    function forEqual(){
         if (equalCounter == 0){
             a = parseInt(a);
             b = parseInt(b);
@@ -175,8 +214,53 @@
             document.getElementById('screen').textContent = answer;
             document.getElementById('memory').textContent = `${tempA} ${operator} ${tempB} =`;
         }
-    }));
+    }
 
+    function forEqualKeyboard(e){
+        if (equalCounter == 0){
+            a = parseInt(a);
+            b = parseInt(b);
+            document.getElementById('screen').textContent = operate(operator, a, b);
+            document.getElementById('memory').textContent = `${a} ${operator} ${b} =`;
+            tempAnswer = operate(operator, a, b);
+            tempA = a;
+            tempB = b;
+            a = '';
+            b = '';
+            temp = false;
+            equalCounter += 1;
+        }
+        else{
+            tempA = operate(operator, tempA, tempB);
+            answer = operate(operator, tempA, tempB);
+            document.getElementById('screen').textContent = answer;
+            document.getElementById('memory').textContent = `${tempA} ${operator} ${tempB} =`;
+        }
+    }
+
+    // for DIGIT BUTTONS --------
+    allButtons.forEach(button => button.addEventListener('click', forDigits));
+    document.addEventListener('keydown', function(e){
+        if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105)) { 
+            forDigitsKeyboard(e);
+        }
+    });
+
+    // for OPERATOR BUTTONS ------
+    operatorButtons.forEach(button => button.addEventListener('click', forOperators));
+    document.addEventListener('keydown', function(e){
+        if (e.keyCode == 106 || e.keyCode == 107 || e.keyCode == 109 || e.keyCode == 111){
+            forOperatorsKeyboard(e);
+        }
+    });
+
+    // for EQUAL SIGN BUTTON
+    equals.forEach(button => button.addEventListener('click', forEqual));
+    document.addEventListener('keydown', function(e){
+        if (e.keyCode == 13){
+            forEqualKeyboard(e);
+        }
+    })
     //clears the screen
     reds.forEach(button => button.addEventListener('click', reset));
 
