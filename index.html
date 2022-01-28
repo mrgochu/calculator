@@ -77,6 +77,7 @@
     let tempB = '';
     let answer = '';
 
+    //change color of orange buttons (operators)
     orange.forEach(button => button.addEventListener('mousedown', function(){
         this.style.backgroundColor = 'rgb(224, 187, 117)';
     }));
@@ -84,6 +85,7 @@
         this.style.backgroundColor = 'rgb(255, 212, 133)';
     }));
 
+    //change numbers and equal sign color (blue)
     blues.forEach(button => button.addEventListener('mousedown', function(){
         this.style.backgroundColor = 'rgb(207, 221, 235)';
     }));
@@ -91,6 +93,7 @@
         this.style.backgroundColor = 'rgb(224, 240, 255)';
     }));
 
+    //change color for clear button (red)
     reds.forEach(button => button.addEventListener('mousedown', function(){
         this.style.backgroundColor = 'rgb(218, 128, 128)';
     }));
@@ -132,8 +135,6 @@
             operator = this.textContent;
             document.getElementById('memory').textContent = `${a} ${operator}`;
         }
-
-
 
     }));
 
