@@ -77,6 +77,21 @@
     let tempB = '';
     let answer = '';
 
+    //reset calculator - wipe variables clean
+    function reset(){
+        a = '';
+        b = '';
+        tempA = '';
+        tempB = '';
+        temp = false;
+        tempAnswer = '';
+        operator = '';
+        equalCounter = 0;
+        answer = '';
+        document.getElementById('screen').textContent = '';
+        document.getElementById('memory').textContent = '';
+    }
+
     //change color of orange buttons (operators)
     orange.forEach(button => button.addEventListener('mousedown', function(){
         this.style.backgroundColor = 'rgb(224, 187, 117)';
@@ -101,7 +116,7 @@
         this.style.backgroundColor = 'rgb(255, 148, 148)';
     }));
 
-    
+    // for DIGIT BUTTONS
     allButtons.forEach(button => button.addEventListener('click', function(){
         equalCounter = 0;
         if (temp){
@@ -114,6 +129,7 @@
         }
     }));
 
+    // for OPERATOR BUTTONS
     operatorButtons.forEach(button => button.addEventListener('click', function(){
         if (b){
             a = parseInt(a);
@@ -138,6 +154,7 @@
 
     }));
 
+    // for EQUAL SIGN BUTTON
     equals.forEach(button => button.addEventListener('click', function(){
         if (equalCounter == 0){
             a = parseInt(a);
@@ -158,24 +175,10 @@
             document.getElementById('screen').textContent = answer;
             document.getElementById('memory').textContent = `${tempA} ${operator} ${tempB} =`;
         }
-
     }));
 
     //clears the screen
-    reds.forEach(button => button.addEventListener('click', function(){
-        a = '';
-        b = '';
-        tempA = '';
-        tempB = '';
-        temp = false;
-        tempAnswer = '';
-        operator = '';
-        equalCounter = 0;
-        answer = '';
-        document.getElementById('screen').textContent = '';
-        document.getElementById('memory').textContent = '';
-    }))
+    reds.forEach(button => button.addEventListener('click', reset));
 
-    
 </script>
 </html>
