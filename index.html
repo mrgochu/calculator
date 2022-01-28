@@ -75,6 +75,7 @@
     let equalCounter = 0;
     let tempA = '';
     let tempB = '';
+    let answer = '';
 
     orange.forEach(button => button.addEventListener('mousedown', function(){
         this.style.backgroundColor = 'rgb(224, 187, 117)';
@@ -114,15 +115,25 @@
         if (b){
             a = parseInt(a);
             b = parseInt(b);
-            a = operate(operator, a, b);
+            let answer = operate(operator, a, b);
+            operator = this.textContent;
+            document.getElementById('memory').textContent = `${answer} ${operator}`;
+            a = answer;
             b = '';
         }
-        else{
-            a = document.getElementById('screen').textContent;
+        else if (!a && !b){
+            a = tempAnswer;
             temp = true;
+            operator = this.textContent;
+            document.getElementById('memory').textContent = `${a} ${operator}`;
         }
-        operator = this.textContent;
-        document.getElementById('memory').textContent = `${a} ${operator}`;
+        else {
+            temp = true;
+            operator = this.textContent;
+            document.getElementById('memory').textContent = `${a} ${operator}`;
+        }
+
+
 
     }));
 
@@ -132,6 +143,7 @@
             b = parseInt(b);
             document.getElementById('screen').textContent = operate(operator, a, b);
             document.getElementById('memory').textContent = `${a} ${operator} ${b} =`;
+            tempAnswer = operate(operator, a, b);
             tempA = a;
             tempB = b;
             a = '';
@@ -141,7 +153,7 @@
         }
         else{
             tempA = operate(operator, tempA, tempB);
-            let answer = operate(operator, tempA, tempB);
+            answer = operate(operator, tempA, tempB);
             document.getElementById('screen').textContent = answer;
             document.getElementById('memory').textContent = `${tempA} ${operator} ${tempB} =`;
         }
@@ -155,6 +167,10 @@
         tempA = '';
         tempB = '';
         temp = false;
+        tempAnswer = '';
+        operator = '';
+        equalCounter = 0;
+        answer = '';
         document.getElementById('screen').textContent = '';
         document.getElementById('memory').textContent = '';
     }))
