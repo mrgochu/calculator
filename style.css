@@ -6,10 +6,11 @@
     font-family: 'Roboto', sans-serif;
     font-family: 'Supermercado One', cursive;
     font-family: 'Zen Kurenaido', sans-serif;
-
+    margin: 0;
+    padding: 0;
 }
 
-body{
+/* body{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,6 +18,14 @@ body{
     min-height: 100vh;
     margin: 0;
     padding: 0;
+} */
+
+.calcContainer{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .operator{
@@ -25,9 +34,6 @@ body{
 
 #container{
     border: 3px solid black;
-    height: 960px;
-    width: 960px;
-    margin: 100px;
     border-radius: 24px;
     display: flex;
     justify-content: flex-end;
@@ -108,10 +114,10 @@ button{
 
 footer{
     font-size: 26px;
-    margin: 15px;
-    padding: 0;
-    position: absolute;
     bottom: 0;
+    position: absolute;
+    text-align: center;
+    margin: 15px;
 }
 
 .fa-github {

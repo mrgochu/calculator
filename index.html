@@ -16,47 +16,50 @@
   </script>
 </head>
 <body>
-    <div id="container">
-        <div class="buttons">
-            <div class="topPart">
-                <div id="display" class="display">
-                    <div id="memory" class="memory"></div>
-                    <div class="screen" id="screen"></div>
+    <div class="calcContainer">
+        <div id="container">
+            <div class="buttons">
+                <div class="topPart">
+                    <div id="display" class="display">
+                        <div id="memory" class="memory"></div>
+                        <div class="screen" id="screen"></div>
+                    </div>
+                </div>
+                <div class="clearButton">
+                    <button class="clear">CLEAR</button>
+                </div>
+                <div>
+                    <button id="7">7</button>
+                    <button id="8">8</button>
+                    <button id="9">9</button>
+                    <button id="/" class="operator orange">/</button>
+                </div>
+                <div>
+                    <button>4</button>
+                    <button>5</button>
+                    <button>6</button>
+                    <button class="operator orange">*</button>
+                </div>
+                <div>
+                    <button>1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button class="operator orange">-</button>
+                </div>
+                <div style="display: flex;">
+                    <button>0</button>
+                    <button id="equals" style="margin:none;" class="equals">=</button>
+                    <button class="operator orange">+</button>
                 </div>
             </div>
-            <div class="clearButton">
-                <button class="clear">CLEAR</button>
-            </div>
-            <div>
-                <button id="7">7</button>
-                <button id="8">8</button>
-                <button id="9">9</button>
-                <button id="/" class="operator orange">/</button>
-            </div>
-            <div>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button class="operator orange">*</button>
-            </div>
-            <div>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button class="operator orange">-</button>
-            </div>
-            <div style="display: flex;">
-                <button>0</button>
-                <button id="equals" style="margin:none;" class="equals">=</button>
-                <button class="operator orange">+</button>
-            </div>
         </div>
+        <footer>Copyright &copy; mrgochu
+            <a href="https://github.com/mrgochu" style="text-decoration: none;">
+                <i class="fab fa-github"></i>
+            </a>
+        </footer>
     </div>
-    <footer>Copyright &copy; mrgochu
-        <a href="https://github.com/mrgochu" style="text-decoration: none;">
-            <i class="fab fa-github"></i>
-        </a>
-    </footer>
+
 </body>
 <script>
     const display = document.getElementById('display');
