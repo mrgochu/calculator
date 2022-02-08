@@ -40,7 +40,6 @@
     flex-direction: column;
     align-items: center;
     padding: 15px;
-    padding-bottom: 25px;
     background-color: rgb(221, 221, 221);
     box-shadow: rgb(0 0 0 / 24%) 0px 5px 16px;
 }
@@ -57,14 +56,13 @@
     flex-wrap: wrap;
     margin: 15px;
     gap: 15px;
-    margin-bottom: 50px;
 }
 
 button{
     margin-left: 5px;
     margin-right: 5px;
-    width: 200px;
-    height: 100px;
+    width: 85px;
+    height: 60px;
     font-size: 32px;
     font-weight: bolder;
     border-radius: 15px;
@@ -79,8 +77,9 @@ button{
 .display{
     border: 3px black solid;
     border-radius: 5px;
+    padding: 10px;
+    padding-right: 20px;
     text-align: right;
-    padding: 50px;
     font-size: 32px;
     background-color: white;
     font-weight: bolder;
@@ -89,6 +88,9 @@ button{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-radius: 15px;
+    max-width: 100%;
+
 }
 
 .memory{
@@ -110,6 +112,9 @@ button{
 
 .screen{
     font-size: 55px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 footer{
